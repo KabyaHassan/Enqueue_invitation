@@ -6,6 +6,10 @@
 <title>BUCC Acceptance Letter</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
+  /* Optional custom heading font: upload wizard-font.woff2 or wizard-font.ttf next to this file.
+     If the file is missing, the page falls back to Cinzel Decorative automatically. */
+  @font-face{font-family:'WizardDisplay';src:url('wizard-font.woff2') format('woff2'),url('wizard-font.ttf') format('truetype');font-display:swap}
+
   :root{
     --gold:#d4a84b; --ink:#3b2412; --parch:#f1e2b8; --parch-d:#d9c08a;
     --red:#a4161a; --green:#1a6b3a; --blue:#1f4e9c; --yellow:#e0a800;
@@ -36,7 +40,7 @@
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
   main{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:40px 16px 80px;text-align:center}
-  .hint{color:#cdb98a;font-family:'Cinzel',serif;letter-spacing:.2em;font-size:.8rem;margin-bottom:22px;animation:pulse 2s infinite}
+  .hint{color:#cdb98a;font-family:'WizardDisplay','Cinzel',serif;letter-spacing:.2em;font-size:.8rem;margin-bottom:22px;animation:pulse 2s infinite}
   @keyframes pulse{50%{opacity:.4}}
 
   /* envelope */
@@ -56,7 +60,7 @@
     position:absolute;left:50%;top:50%;width:78px;height:78px;margin:-39px 0 0 -39px;z-index:4;border-radius:50%;
     background:radial-gradient(circle at 35% 30%,#d13a3a,#7a0d12 70%);
     box-shadow:0 4px 12px rgba(0,0,0,.6),inset 0 0 0 5px rgba(0,0,0,.18);
-    display:grid;place-items:center;color:#f3d487;font-family:'Cinzel Decorative',serif;font-size:1.5rem;
+    display:grid;place-items:center;color:#f3d487;font-family:'WizardDisplay','Cinzel Decorative',serif;font-size:1.5rem;
     text-shadow:0 1px 2px #000;transition:opacity .4s;
   }
   .seal::after{content:"";position:absolute;inset:9px;border:1px dashed rgba(243,212,135,.6);border-radius:50%}
@@ -84,14 +88,14 @@
   #letter .greet,#letter .banner,#letter h2,#letter .ornament,#letter .count,#letter .houses,#letter #houseMsg{text-align:center}
   #letter .sign{text-align:left}
 
-  .greet{font-family:'Cinzel Decorative',serif;font-size:clamp(1.3rem,4vw,1.8rem);color:#5a1a1a;text-align:center;margin-bottom:18px}
+  .greet{font-family:'WizardDisplay','Cinzel Decorative',serif;font-size:clamp(1.3rem,4vw,1.8rem);color:#5a1a1a;text-align:center;margin-bottom:18px}
   .banner{
-    text-align:center;font-family:'Cinzel',serif;font-weight:600;font-size:clamp(1.05rem,3.4vw,1.35rem);
+    text-align:center;font-family:'WizardDisplay','Cinzel',serif;font-weight:600;font-size:clamp(1.05rem,3.4vw,1.35rem);
     line-height:1.45;color:#6d1217;margin:8px 0 22px;padding:14px 8px;
     border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);
   }
   p{font-size:1.12rem;line-height:1.65;margin-bottom:16px;text-align:justify;text-justify:inter-word;hyphens:auto}
-  h2{font-family:'Cinzel',serif;letter-spacing:.14em;text-align:center;margin:26px 0 14px;font-size:1.05rem;color:#5a1a1a}
+  h2{font-family:'WizardDisplay','Cinzel',serif;letter-spacing:.14em;text-align:center;margin:26px 0 14px;font-size:1.05rem;color:#5a1a1a}
   .ornament{text-align:center;color:#8a6a2a;letter-spacing:.6em;margin:6px 0}
 
   .details{background:rgba(255,248,220,.45);border:1px solid rgba(110,70,20,.4);border-radius:6px;padding:8px 20px;margin-bottom:10px}
@@ -118,12 +122,18 @@
   .count small{font-size:.6rem;letter-spacing:.15em}
 
   .sign{margin-top:28px;font-size:1.1rem}
-  .sign .name{font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:#5a1a1a;margin:6px 0 2px}
+  .sign .name{font-family:'WizardDisplay','Cinzel Decorative',serif;font-size:1.4rem;color:#5a1a1a;margin:6px 0 2px}
   .sign small{display:block;line-height:1.5;font-style:italic}
 
   .wand{position:fixed;pointer-events:none;z-index:9;font-size:18px;animation:fade 1s forwards}
   @keyframes fade{to{opacity:0;transform:translateY(-30px) scale(.3)}}
   @media(max-width:480px){.row{flex-direction:column;align-items:flex-start;gap:2px}.count div{min-width:56px}}
+
+  .join{text-align:center;margin:6px 0 24px;padding:18px 14px;background:rgba(255,248,220,.45);border:1px dashed rgba(110,70,20,.55);border-radius:8px}
+  .join h2{margin:0 0 8px}
+  .join p{text-align:center;margin-bottom:14px}
+  .join-btn{display:inline-block;padding:13px 28px;border-radius:30px;background:linear-gradient(180deg,#e6bf5e,#c99a33);border:2px solid #8a6a2a;color:#2a1608;text-decoration:none;font-family:'Cinzel',serif;font-weight:700;letter-spacing:.06em;font-size:.95rem;box-shadow:0 4px 12px rgba(0,0,0,.3);transition:transform .2s}
+  .join-btn:hover{transform:translateY(-2px)}
 </style>
 </head>
 <body>
@@ -140,7 +150,7 @@
   </div>
 
   <article id="letter">
-    <div class="greet">Welcome, Young Wizard,</div>
+    <div class="greet">Greetings, Young Wizard,</div>
 
     <p>Some letters are worth waiting for, and some carry the beginning of an extraordinary adventure. This one happens to be yours!</p>
 
@@ -182,14 +192,25 @@
 
     <div class="banner" style="font-size:1.1rem">Welcome to BUCC. Your magical &amp; logical journey begins now!</div>
 
+    <div class="join">
+      <h2>JOIN THE CLUB MESSENGER GROUP</h2>
+      <p>Every update about the gathering will be shared there.</p>
+      <a id="joinBtn" class="join-btn" href="#" target="_blank" rel="noopener">Join the Messenger Group</a>
+    </div>
+
     <div class="sign">
       Warm regards,
-      <small>Human Resources Department<br>BRAC University Computer Club</small>
+      <div class="name">Kabya Hassan</div>
+      <small>Director, Human Resources<br>BRAC University Computer Club</small>
     </div>
   </article>
 </main>
 
 <script>
+// ▼▼▼ PASTE YOUR MESSENGER GROUP LINK BETWEEN THE QUOTES BELOW ▼▼▼
+const MESSENGER_LINK = 'https://m.me/j/abYJZf-1oPpY7i5s/?send_source=gc:copy_invite_link_c';
+// ▲▲▲ example: 'https://m.me/j/AbCdEfGh...' ▲▲▲
+document.getElementById('joinBtn').href = MESSENGER_LINK || '#';
 // stars
 const sky=document.getElementById('stars');
 for(let i=0;i<110;i++){

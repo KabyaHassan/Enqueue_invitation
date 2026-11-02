@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BUCC Acceptance Letter</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#d4a84b; --ink:#3b2412; --parch:#f1e2b8; --parch-d:#d9c08a;
+    --red:#a4161a; --green:#1a6b3a; --blue:#1f4e9c; --yellow:#e0a800;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%}
+  body{
+    font-family:'IM Fell English',Georgia,serif;
+    color:var(--ink);
+    background:radial-gradient(ellipse at 50% 0%,#1d1a3a 0%,#0b0a1a 55%,#05040c 100%) fixed;
+    overflow-x:hidden;
+  }
+  /* stars */
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0}
+  .star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:tw 3s infinite ease-in-out}
+  @keyframes tw{0%,100%{opacity:.15;transform:scale(.8)}50%{opacity:1;transform:scale(1.4)}}
+
+  /* floating candles */
+  .candles{position:fixed;inset:0;pointer-events:none;z-index:1}
+  .candle{position:absolute;width:14px;animation:float 6s ease-in-out infinite}
+  .candle .wax{width:14px;height:70px;background:linear-gradient(90deg,#e9dcc0,#fff7e0,#e9dcc0);border-radius:3px 3px 2px 2px}
+  .candle .flame{position:absolute;left:50%;top:-24px;width:10px;height:22px;margin-left:-5px;
+    background:radial-gradient(ellipse at 50% 70%,#fff6c2 0%,#ffbf3c 45%,rgba(255,120,0,0) 75%);
+    border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+    filter:blur(.5px);box-shadow:0 0 22px 8px rgba(255,170,40,.45);
+    animation:flick .15s infinite alternate}
+  @keyframes flick{from{transform:scale(1,1) rotate(-2deg)}to{transform:scale(.9,1.1) rotate(2deg)}}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+  main{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:40px 16px 80px;text-align:center}
+  .hint{color:#cdb98a;font-family:'Cinzel',serif;letter-spacing:.2em;font-size:.8rem;margin-bottom:22px;animation:pulse 2s infinite}
+  @keyframes pulse{50%{opacity:.4}}
+
+  /* envelope */
+  #envelope{
+    position:relative;width:min(420px,92%);height:270px;margin:30px auto 0;cursor:pointer;
+    transition:transform .6s;
+  }
+  #envelope:hover{transform:translateY(-4px) rotate(-.5deg)}
+  .env-body{position:absolute;inset:0;background:linear-gradient(160deg,#e3cf9a,#c9ad6c);border-radius:6px;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+  .env-body::before,.env-body::after{content:"";position:absolute;bottom:0;width:50%;height:100%;
+    background:linear-gradient(160deg,rgba(255,255,255,.18),rgba(0,0,0,.12))}
+  .env-body::before{left:0;clip-path:polygon(0 0,100% 100%,0 100%)}
+  .env-body::after{right:0;clip-path:polygon(100% 0,100% 100%,0 100%)}
+  .flap{position:absolute;top:0;left:0;width:100%;height:60%;background:linear-gradient(180deg,#d9c07f,#bfa05c);
+    clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .8s .3s,z-index 0s .6s;z-index:3}
+  .seal{
+    position:absolute;left:50%;top:50%;width:78px;height:78px;margin:-39px 0 0 -39px;z-index:4;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#d13a3a,#7a0d12 70%);
+    box-shadow:0 4px 12px rgba(0,0,0,.6),inset 0 0 0 5px rgba(0,0,0,.18);
+    display:grid;place-items:center;color:#f3d487;font-family:'Cinzel Decorative',serif;font-size:1.5rem;
+    text-shadow:0 1px 2px #000;transition:opacity .4s;
+  }
+  .seal::after{content:"";position:absolute;inset:9px;border:1px dashed rgba(243,212,135,.6);border-radius:50%}
+  #envelope.open .flap{transform:rotateX(180deg);z-index:0}
+  #envelope.open .seal{opacity:0;pointer-events:none}
+  #envelope.open{pointer-events:none;height:150px;margin-bottom:-60px;opacity:.9}
+
+  /* letter */
+  #letter{
+    display:none;margin-top:0;position:relative;text-align:left;
+    background:
+      radial-gradient(ellipse at 10% 5%,rgba(120,70,20,.25),transparent 40%),
+      radial-gradient(ellipse at 95% 95%,rgba(120,70,20,.3),transparent 45%),
+      linear-gradient(135deg,var(--parch),var(--parch-d));
+    padding:48px clamp(22px,6vw,64px) 44px;border-radius:4px;
+    box-shadow:0 25px 70px rgba(0,0,0,.7),inset 0 0 60px rgba(110,70,20,.35);
+    animation:rise 1.2s ease-out both;
+  }
+  #letter::before,#letter::after{content:"";position:absolute;left:0;width:100%;height:10px;
+    background:repeating-linear-gradient(90deg,transparent 0 8px,rgba(110,70,20,.25) 8px 10px);opacity:.6}
+  #letter::before{top:0}#letter::after{bottom:0}
+  @keyframes rise{from{opacity:0;transform:translateY(60px) scale(.94)}to{opacity:1;transform:none}}
+  #letter.show{display:block}
+  #letter{text-align:justify}
+  #letter .greet,#letter .banner,#letter h2,#letter .ornament,#letter .count,#letter .houses,#letter #houseMsg{text-align:center}
+  #letter .sign{text-align:left}
+
+  .greet{font-family:'Cinzel Decorative',serif;font-size:clamp(1.3rem,4vw,1.8rem);color:#5a1a1a;text-align:center;margin-bottom:18px}
+  .banner{
+    text-align:center;font-family:'Cinzel',serif;font-weight:600;font-size:clamp(1.05rem,3.4vw,1.35rem);
+    line-height:1.45;color:#6d1217;margin:8px 0 22px;padding:14px 8px;
+    border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);
+  }
+  p{font-size:1.12rem;line-height:1.65;margin-bottom:16px;text-align:justify;text-justify:inter-word;hyphens:auto}
+  h2{font-family:'Cinzel',serif;letter-spacing:.14em;text-align:center;margin:26px 0 14px;font-size:1.05rem;color:#5a1a1a}
+  .ornament{text-align:center;color:#8a6a2a;letter-spacing:.6em;margin:6px 0}
+
+  .details{background:rgba(255,248,220,.45);border:1px solid rgba(110,70,20,.4);border-radius:6px;padding:8px 20px;margin-bottom:10px}
+  .row{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px dashed rgba(110,70,20,.35);font-size:1.12rem}
+  .row:last-child{border:none}
+  .row b{font-family:'Cinzel',serif;min-width:110px;color:#5a1a1a;font-size:.95rem}
+
+  .houses{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:10px 0 6px}
+  .house{
+    width:74px;height:92px;border-radius:6px 6px 38px 38px;display:grid;place-items:end center;padding-bottom:12px;
+    font-family:'Cinzel',serif;font-weight:600;font-size:.72rem;letter-spacing:.1em;color:#fff;
+    box-shadow:0 6px 14px rgba(0,0,0,.4),inset 0 0 0 3px rgba(255,255,255,.25);transition:transform .25s;cursor:pointer;
+  }
+  .house:hover{transform:translateY(-8px) rotate(-2deg)}
+  .house.red{background:linear-gradient(180deg,#c9232a,var(--red))}
+  .house.green{background:linear-gradient(180deg,#2a9055,var(--green))}
+  .house.blue{background:linear-gradient(180deg,#3a73c9,var(--blue))}
+  .house.yellow{background:linear-gradient(180deg,#f3c623,var(--yellow));color:#3b2412}
+  #houseMsg{text-align:center;font-style:italic;min-height:1.6em;color:#5a1a1a;margin-top:10px}
+
+  .count{display:flex;justify-content:center;gap:10px;margin:8px 0 4px}
+  .count div{background:#2a1608;color:#f3d487;padding:10px 6px;border-radius:6px;min-width:64px;text-align:center;font-family:'Cinzel',serif}
+  .count span{display:block;font-size:1.5rem;font-weight:600}
+  .count small{font-size:.6rem;letter-spacing:.15em}
+
+  .sign{margin-top:28px;font-size:1.1rem}
+  .sign .name{font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:#5a1a1a;margin:6px 0 2px}
+  .sign small{display:block;line-height:1.5;font-style:italic}
+
+  .wand{position:fixed;pointer-events:none;z-index:9;font-size:18px;animation:fade 1s forwards}
+  @keyframes fade{to{opacity:0;transform:translateY(-30px) scale(.3)}}
+  @media(max-width:480px){.row{flex-direction:column;align-items:flex-start;gap:2px}.count div{min-width:56px}}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div class="candles" id="candles"></div>
+
+<main>
+  <div class="hint" id="hint">✦ TAP THE WAX SEAL TO OPEN YOUR LETTER ✦</div>
+
+  <div id="envelope" title="Open">
+    <div class="env-body"></div>
+    <div class="flap"></div>
+    <div class="seal">B</div>
+  </div>
+
+  <article id="letter">
+    <div class="greet">Greetings, Young Wizard,</div>
+
+    <p>Some letters are worth waiting for, and some carry the beginning of an extraordinary adventure. This one happens to be yours!</p>
+
+    <div class="banner">After careful consideration, we are delighted to announce that YOU HAVE BEEN ACCEPTED INTO THE BRAC UNIVERSITY COMPUTER CLUB (BUCC)!</div>
+
+    <p>Your journey into a world of creativity, innovation, collaboration, and endless possibilities is about to begin. Much like the magical halls of Hogwarts, BUCC is a place where curious minds come together, discover their strengths, develop extraordinary skills, and turn seemingly impossible ideas into reality.</p>
+
+    <p>But every great adventure deserves a proper beginning! We are excited to invite you to your very first BUCC gathering, where you will get to meet your fellow members, connect with the community, and begin this exciting new chapter.</p>
+
+    <div class="ornament">⚡ ✦ ⚡</div>
+    <h2>THE DETAILS OF YOUR FIRST MAGICAL GATHERING</h2>
+
+    <div class="details">
+      <div class="row"><b>📅 Date</b><span>Thursday, 5th November 2026</span></div>
+      <div class="row"><b>🕔 Time</b><span>5:00 PM</span></div>
+      <div class="row"><b>📍 Venue</b><span>9G-31T</span></div>
+      <div class="row"><b>🎨 Dress Code</b><span>Red, Green, Blue, or Yellow</span></div>
+    </div>
+
+    <h2>THE GATHERING BEGINS IN</h2>
+    <div class="count" id="count">
+      <div><span id="d">--</span><small>DAYS</small></div>
+      <div><span id="h">--</span><small>HOURS</small></div>
+      <div><span id="m">--</span><small>MINS</small></div>
+      <div><span id="s">--</span><small>SECS</small></div>
+    </div>
+
+    <h2>CHOOSE YOUR COLOUR</h2>
+    <p>These four colours represent the four legendary Hogwarts houses. Choose your colour, embrace your house spirit, and come prepared to bring a little magic to the gathering!</p>
+    <div class="houses">
+      <div class="house red" data-m="🦁 Red is the colour of GRYFFINDOR, the house of the brave. Wear it with courage!">RED</div>
+      <div class="house green" data-m="🐍 Green is the colour of SLYTHERIN, the house of the ambitious. Wear it with cunning!">GREEN</div>
+      <div class="house blue" data-m="🦅 Blue is the colour of RAVENCLAW, the house of the wise. Wear it with wit!">BLUE</div>
+      <div class="house yellow" data-m="🦡 Yellow is the colour of HUFFLEPUFF, the house of the loyal. Wear it with pride!">YELLOW</div>
+    </div>
+    <div id="houseMsg">Each colour hides a secret. Brush a banner with your wand and see which house answers…</div>
+
+    <p style="margin-top:20px">Whether you are brave, ambitious, wise, or loyal, there is a place for you in this community. Your wand may be optional, but your enthusiasm is essential!</p>
+
+    <div class="banner" style="font-size:1.1rem">Welcome to BUCC. Your magical &amp; logical journey begins now!</div>
+
+    <div class="sign">
+      Warm regards,
+      <div class="name">Kabya Hassan</div>
+      <small>Director, Human Resources<br>BRAC University Computer Club</small>
+    </div>
+  </article>
+</main>
+
+<script>
+// stars
+const sky=document.getElementById('stars');
+for(let i=0;i<110;i++){
+  const s=document.createElement('div');s.className='star';
+  s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';
+  s.style.animationDelay=Math.random()*3+'s';s.style.animationDuration=2+Math.random()*3+'s';
+  sky.appendChild(s);
+}
+// candles
+const cw=document.getElementById('candles');
+for(let i=0;i<9;i++){
+  const c=document.createElement('div');c.className='candle';
+  c.style.left=(4+i*11+Math.random()*4)+'%';c.style.top=(4+Math.random()*22)+'%';
+  c.style.animationDelay=(-Math.random()*6)+'s';c.style.opacity=.55+Math.random()*.4;
+  c.innerHTML='<div class="flame"></div><div class="wax"></div>';
+  cw.appendChild(c);
+}
+// open envelope
+const env=document.getElementById('envelope'),letter=document.getElementById('letter'),hint=document.getElementById('hint');
+env.addEventListener('click',()=>{
+  env.classList.add('open');hint.style.display='none';
+  setTimeout(()=>{
+    env.style.display='none';          // remove envelope so the letter starts at the very top
+    letter.classList.add('show');
+    window.scrollTo({top:0,left:0,behavior:'auto'});
+    requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));
+  },900);
+});
+// countdown (gathering date, local Dhaka time)
+const target=new Date('2026-11-05T17:00:00+06:00').getTime();
+function tick(){
+  let diff=Math.max(0,target-Date.now());
+  const d=Math.floor(diff/864e5);diff%=864e5;
+  const h=Math.floor(diff/36e5);diff%=36e5;
+  const m=Math.floor(diff/6e4);const s=Math.floor(diff%6e4/1e3);
+  [['d',d],['h',h],['m',m],['s',s]].forEach(([id,v])=>document.getElementById(id).textContent=String(v).padStart(2,'0'));
+}
+tick();setInterval(tick,1000);
+// house picker
+document.querySelectorAll('.house').forEach(h=>h.addEventListener('click',()=>{
+  document.getElementById('houseMsg').textContent=h.dataset.m;
+}));
+// wand sparkle trail
+document.addEventListener('pointermove',e=>{
+  if(Math.random()>.35)return;
+  const w=document.createElement('div');w.className='wand';w.textContent=['✦','✧','⚡','·'][Math.floor(Math.random()*4)];
+  w.style.left=e.clientX+'px';w.style.top=e.clientY+'px';w.style.color=['#f3d487','#fff','#9ec5ff','#ffb4b4'][Math.floor(Math.random()*4)];
+  document.body.appendChild(w);setTimeout(()=>w.remove(),1000);
+});
+</script>
+</body>
+</html>

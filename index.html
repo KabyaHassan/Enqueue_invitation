@@ -361,8 +361,12 @@ function placeMoon(){
   const sv=document.getElementById('castle'),mn=document.getElementById('moon');
   const W=innerWidth,H=sv.getBoundingClientRect().height,top0=innerHeight-H;
   const k=Math.max(W/1200,H/300),ox=(W-1200*k)/2,oy=H-300*k;
-  const d=Math.max(58,84*k);
-  let x=ox+935*k, y=top0+oy+(-5+20)*k;          // beside the tallest right spire tip
+  const d=Math.min(70,Math.max(52,W*0.045));    // capped so it never gets huge on wide screens
+  // right-hand spire tip is at (872,-5) in the castle drawing; the moon sits just beside it,
+  // in front of the castle (never behind it), a little lower than the tip
+  let x=ox+940*k, tipY=top0+oy+(-5+20)*k;
+  const lift=Math.min(d*1.5,Math.max(0,W-1100)*0.12);   // extra upward shift as the window widens
+  let y=Math.max(tipY,top0+d*0.6)+d*0.1-lift;
   x=Math.min(x,W-d/2-10);
   mn.style.width=d+'px';
   mn.style.left=(x-d/2)+'px';

@@ -29,9 +29,9 @@
 
   /* floating candles */
   .candles{position:fixed;inset:0;pointer-events:none;z-index:1}
-  .candle{position:absolute;width:14px;animation:float 6s ease-in-out infinite}
-  .candle .wax{width:14px;height:70px;background:linear-gradient(90deg,#e9dcc0,#fff7e0,#e9dcc0);border-radius:3px 3px 2px 2px}
-  .candle .flame{position:absolute;left:50%;top:-24px;width:10px;height:22px;margin-left:-5px;
+  .candle{position:absolute;width:calc(14px*var(--k,1));animation:float 6s ease-in-out infinite}
+  .candle .wax{width:calc(14px*var(--k,1));height:calc(70px*var(--k,1));background:linear-gradient(90deg,#e9dcc0,#fff7e0,#e9dcc0);border-radius:3px 3px 2px 2px}
+  .candle .flame{position:absolute;left:50%;top:calc(-24px*var(--k,1));width:calc(10px*var(--k,1));height:calc(22px*var(--k,1));margin-left:calc(-5px*var(--k,1));
     background:radial-gradient(ellipse at 50% 70%,#fff6c2 0%,#ffbf3c 45%,rgba(255,120,0,0) 75%);
     border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
     filter:blur(.5px);box-shadow:0 0 22px 8px rgba(255,170,40,.45);
@@ -39,13 +39,14 @@
   @keyframes flick{from{transform:scale(1,1) rotate(-2deg)}to{transform:scale(.9,1.1) rotate(2deg)}}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
-  main{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:40px 16px 80px;text-align:center}
-  .hint{color:#cdb98a;font-family:'WizardDisplay','Cinzel',serif;letter-spacing:.2em;font-size:.8rem;margin-bottom:22px;animation:pulse 2s infinite}
+  main{position:relative;z-index:2;max-width:clamp(700px,52vw,960px);margin:0 auto;padding:40px 16px 40px;text-align:center}
+  main.closed{padding-top:26px}
+  .hint{color:#cdb98a;font-family:'WizardDisplay','Cinzel',serif;letter-spacing:.2em;font-size:.8rem;margin-bottom:10px;animation:pulse 2s infinite}
   @keyframes pulse{50%{opacity:.4}}
 
   /* envelope */
   #envelope{
-    position:relative;width:min(420px,92%);height:270px;margin:30px auto 0;cursor:pointer;
+    position:relative;width:min(clamp(420px,32vw,560px),92%);aspect-ratio:420/270;margin:70px auto 0;cursor:pointer;
     transition:transform .6s;
   }
   #envelope:hover{transform:translateY(-4px) rotate(-.5deg)}
@@ -88,18 +89,18 @@
   #letter .greet,#letter .banner,#letter h2,#letter .ornament,#letter .count,#letter .houses,#letter #houseMsg{text-align:center}
   #letter .sign{text-align:left}
 
-  .greet{font-family:'WizardDisplay','Cinzel Decorative',serif;font-size:clamp(1.3rem,4vw,1.8rem);color:#5a1a1a;text-align:center;margin-bottom:18px}
+  .greet{font-family:'WizardDisplay','Cinzel Decorative',serif;font-size:clamp(1.3rem,1rem + 1.1vw,2rem);color:#5a1a1a;text-align:center;margin-bottom:18px}
   .banner{
-    text-align:center;font-family:'WizardDisplay','Cinzel',serif;font-weight:600;font-size:clamp(1.05rem,3.4vw,1.35rem);
+    text-align:center;font-family:'WizardDisplay','Cinzel',serif;font-weight:600;font-size:clamp(1.05rem,.8rem + .7vw,1.45rem);
     line-height:1.45;color:#6d1217;margin:8px 0 22px;padding:14px 8px;
     border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);
   }
-  p{font-size:1.12rem;line-height:1.65;margin-bottom:16px;text-align:justify;text-justify:inter-word;hyphens:auto}
-  h2{font-family:'WizardDisplay','Cinzel',serif;letter-spacing:.14em;text-align:center;margin:26px 0 14px;font-size:1.05rem;color:#5a1a1a}
+  p{font-size:clamp(1.05rem,.95rem + .2vw,1.25rem);line-height:1.65;margin-bottom:16px;text-align:justify;text-justify:inter-word;hyphens:auto}
+  h2{font-family:'WizardDisplay','Cinzel',serif;letter-spacing:.14em;text-align:center;margin:26px 0 14px;font-size:clamp(1rem,.85rem + .25vw,1.2rem);color:#5a1a1a}
   .ornament{text-align:center;color:#8a6a2a;letter-spacing:.6em;margin:6px 0}
 
   .details{background:rgba(255,248,220,.45);border:1px solid rgba(110,70,20,.4);border-radius:6px;padding:8px 20px;margin-bottom:10px}
-  .row{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px dashed rgba(110,70,20,.35);font-size:1.12rem}
+  .row{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px dashed rgba(110,70,20,.35);font-size:clamp(1.05rem,.95rem + .2vw,1.25rem)}
   .row:last-child{border:none}
   .row b{font-family:'Cinzel',serif;min-width:110px;color:#5a1a1a;font-size:.95rem}
 
@@ -134,19 +135,121 @@
   .join p{text-align:center;margin-bottom:14px}
   .join-btn{display:inline-block;padding:13px 28px;border-radius:30px;background:linear-gradient(180deg,#e6bf5e,#c99a33);border:2px solid #8a6a2a;color:#2a1608;text-decoration:none;font-family:'Cinzel',serif;font-weight:700;letter-spacing:.06em;font-size:.95rem;box-shadow:0 4px 12px rgba(0,0,0,.3);transition:transform .2s}
   .join-btn:hover{transform:translateY(-2px)}
+
+  /* ===== HOGWARTS SCENERY ===== */
+  #castle{position:fixed;left:0;bottom:0;width:100%;height:min(36vh,320px);z-index:1;pointer-events:none}
+  .win{fill:#ffcf5a;animation:wf 3s infinite alternate ease-in-out}
+  @keyframes wf{from{opacity:.35}to{opacity:1}}
+  #moon{position:fixed;z-index:1;pointer-events:none;width:72px;aspect-ratio:1;border-radius:50%;left:70vw;top:30vh;
+    background:radial-gradient(circle at 30% 28%,#fffbe6 0%,#f6ecc0 55%,#e2d49c 100%);
+    box-shadow:0 0 30px 8px rgba(255,244,200,.35),0 0 80px 24px rgba(255,244,200,.15)}
+  #moon::before,#moon::after{content:"";position:absolute;border-radius:50%;background:rgba(190,175,120,.35)}
+  #moon::before{width:18%;height:18%;left:24%;top:30%}
+  #moon::after{width:12%;height:12%;left:58%;top:56%}
+  .bat{position:fixed;z-index:1;pointer-events:none;font-size:22px;left:-8vw;opacity:.8;animation:batfly 14s linear infinite}
+  @keyframes batfly{0%{transform:translate(0,0) scale(.8)}25%{transform:translate(30vw,-30px) scale(1.1)}50%{transform:translate(60vw,20px) scale(.9)}75%{transform:translate(90vw,-25px) scale(1.2)}100%{transform:translate(120vw,10px) scale(1)}}
+
+  /* ===== OWL ===== */
+  #owl{position:absolute;top:-66px;right:-14px;width:104px;height:114px;z-index:6;pointer-events:none;
+    filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
+  #owl svg{width:100%;height:100%;overflow:visible}
+  #owl.flying{animation:owlFly 3.4s cubic-bezier(.3,.6,.4,1) both}
+  @keyframes owlFly{
+    0%{transform:translate(-120vw,-60px) scale(1.5) rotate(8deg)}
+    35%{transform:translate(-70vw,50px) scale(1.4) rotate(-6deg)}
+    70%{transform:translate(-18vw,-30px) scale(1.2) rotate(5deg)}
+    90%{transform:translate(-2vw,-24px) scale(1.05) rotate(-3deg)}
+    100%{transform:translate(0,0) scale(1) rotate(0)}
+  }
+  #owl.leaving{animation:owlLeave 1.1s ease-in both}
+  @keyframes owlLeave{0%{transform:translate(0,0) scale(1)}100%{transform:translate(55vw,-70vh) scale(1.5) rotate(10deg)}}
+  #owl.patrol{animation:owlPatrol 4.6s ease-in-out both}
+  @keyframes owlPatrol{
+    0%{transform:translate(0,0)}
+    22%{transform:translate(-26vw,-80px) scale(1.15) rotate(-8deg)}
+    48%{transform:translate(-62vw,10px) scale(1.25) rotate(6deg)}
+    75%{transform:translate(-30vw,-90px) scale(1.15) rotate(-6deg)}
+    100%{transform:translate(0,0)}
+  }
+  .wl,.wr{transform-origin:30px 55px}
+  .wr{transform-origin:70px 55px}
+  #owl.flying .wl,#owl.leaving .wl,#owl.patrol .wl{animation:flapL .22s ease-in-out infinite alternate}
+  #owl.flying .wr,#owl.leaving .wr,#owl.patrol .wr{animation:flapR .22s ease-in-out infinite alternate}
+  @keyframes flapL{from{transform:rotate(35deg)}to{transform:rotate(125deg)}}
+  @keyframes flapR{from{transform:rotate(-35deg)}to{transform:rotate(-125deg)}}
+  #owl.perched .head{animation:tilt 5s ease-in-out infinite;transform-origin:50px 50px}
+  @keyframes tilt{0%,40%,100%{transform:rotate(0)}48%,60%{transform:rotate(-14deg)}68%,80%{transform:rotate(10deg)}}
+  .lid{transform-origin:center;transform-box:fill-box;transform:scaleY(0)}
+  #owl.perched .lid{animation:blink 4s infinite}
+  @keyframes blink{0%,92%,100%{transform:scaleY(0)}95%{transform:scaleY(1)}}
+  .hoot{position:absolute;left:-84px;top:2px;font-family:'Cinzel',serif;font-weight:600;font-size:.8rem;color:#f3d487;
+    background:#2a1608;border:1px solid var(--gold);padding:4px 9px;border-radius:12px;opacity:0;white-space:nowrap}
+  #owl.perched .hoot{animation:hoot 3.2s 0.4s both}
+  @keyframes hoot{0%{opacity:0;transform:translateY(6px)}15%,70%{opacity:1;transform:none}100%{opacity:0}}
+  .feather{position:absolute;z-index:6;font-size:18px;pointer-events:none;animation:drift 3s ease-in forwards}
+  @keyframes drift{0%{opacity:1;transform:translate(0,0) rotate(0)}100%{opacity:0;transform:translate(var(--dx),160px) rotate(220deg)}}
+  @media(prefers-reduced-motion:reduce){#owl.flying{animation-duration:.01s}}
 </style>
 </head>
 <body>
 <div id="stars"></div>
 <div class="candles" id="candles"></div>
+<div id="moon" aria-hidden="true"></div>
+<svg id="castle" viewBox="0 -20 1200 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <g fill="#07061a">
+    <path d="M0 250 Q150 190 300 225 T600 215 T900 225 T1200 205 L1200 300 L0 300Z"/>
+    <rect x="410" y="150" width="380" height="110"/>
+    <rect x="290" y="95" width="56" height="165"/><polygon points="284,95 318,25 352,95"/>
+    <rect x="560" y="55" width="76" height="205"/><polygon points="552,55 598,-18 644,55"/>
+    <rect x="840" y="70" width="64" height="190"/><polygon points="833,70 872,-5 911,70"/>
+    <rect x="150" y="165" width="44" height="95"/><polygon points="144,165 172,115 200,165"/>
+    <rect x="990" y="150" width="46" height="110"/><polygon points="984,150 1013,98 1042,150"/>
+    <rect x="450" y="120" width="40" height="40"/><polygon points="445,120 470,80 495,120"/>
+    <rect x="715" y="115" width="44" height="45"/><polygon points="710,115 737,72 764,115"/>
+    <rect x="360" y="170" width="50" height="90"/><rect x="790" y="175" width="50" height="85"/>
+  </g>
+  <g id="wins"></g>
+</svg>
 
-<main>
+<div class="bat" style="top:30vh;animation-delay:-2s">🦇</div>
+<div class="bat" style="top:50vh;animation-delay:-8s;font-size:17px">🦇</div>
+<div class="bat" style="top:40vh;animation-delay:-12s;font-size:26px">🦇</div>
+
+<main class="closed" id="stage">
   <div class="hint" id="hint">✦ TAP THE WAX SEAL TO OPEN YOUR LETTER ✦</div>
 
   <div id="envelope" title="Open">
     <div class="env-body"></div>
     <div class="flap"></div>
     <div class="seal">B</div>
+  <div id="owl" aria-hidden="true">
+    <div class="hoot">Hoo-hoo! 🦉</div>
+    <svg viewBox="0 0 100 110">
+      <!-- feet -->
+      <g fill="#e39a2d"><path d="M36 100 l-4 8 M36 100 l0 9 M36 100 l4 8" stroke="#e39a2d" stroke-width="3" stroke-linecap="round"/><path d="M64 100 l-4 8 M64 100 l0 9 M64 100 l4 8" stroke="#e39a2d" stroke-width="3" stroke-linecap="round"/></g>
+      <!-- wings -->
+      <path class="wl" d="M30 55 Q-2 60 4 100 Q22 90 36 84 Z" fill="#6b4423" stroke="#4a2d14" stroke-width="2"/>
+      <path class="wr" d="M70 55 Q102 60 96 100 Q78 90 64 84 Z" fill="#6b4423" stroke="#4a2d14" stroke-width="2"/>
+      <!-- body -->
+      <ellipse cx="50" cy="72" rx="26" ry="32" fill="#8a5a2f" stroke="#4a2d14" stroke-width="2"/>
+      <ellipse cx="50" cy="78" rx="17" ry="24" fill="#e8d3a0"/>
+      <g fill="none" stroke="#b8935a" stroke-width="1.5" stroke-linecap="round">
+        <path d="M42 68 q4 4 8 0 q4 4 8 0"/><path d="M40 78 q5 4 10 0 q5 4 10 0"/><path d="M42 88 q4 4 8 0 q4 4 8 0"/>
+      </g>
+      <!-- head -->
+      <g class="head">
+        <path d="M26 30 L30 10 L42 24 Z M74 30 L70 10 L58 24 Z" fill="#6b4423" stroke="#4a2d14" stroke-width="2" stroke-linejoin="round"/>
+        <ellipse cx="50" cy="38" rx="28" ry="24" fill="#8a5a2f" stroke="#4a2d14" stroke-width="2"/>
+        <circle cx="38" cy="38" r="12" fill="#f6ecd0" stroke="#4a2d14" stroke-width="1.5"/>
+        <circle cx="62" cy="38" r="12" fill="#f6ecd0" stroke="#4a2d14" stroke-width="1.5"/>
+        <circle cx="38" cy="38" r="7" fill="#f0b323"/><circle cx="62" cy="38" r="7" fill="#f0b323"/>
+        <circle cx="38" cy="38" r="3.6" fill="#1a0f06"/><circle cx="62" cy="38" r="3.6" fill="#1a0f06"/>
+        <circle cx="36.5" cy="36.5" r="1.3" fill="#fff"/><circle cx="60.5" cy="36.5" r="1.3" fill="#fff"/>
+        <circle class="lid" cx="38" cy="38" r="12" fill="#8a5a2f"/><circle class="lid" cx="62" cy="38" r="12" fill="#8a5a2f"/>
+        <path d="M45 46 L55 46 L50 58 Z" fill="#e39a2d" stroke="#8a5a14" stroke-width="1.5" stroke-linejoin="round"/>
+      </g>
+    </svg>
+  </div>
   </div>
 
   <article id="letter">
@@ -218,26 +321,81 @@ for(let i=0;i<110;i++){
   s.style.animationDelay=Math.random()*3+'s';s.style.animationDuration=2+Math.random()*3+'s';
   sky.appendChild(s);
 }
-// candles
+// candles (more and bigger on wide screens)
 const cw=document.getElementById('candles');
-for(let i=0;i<9;i++){
-  const c=document.createElement('div');c.className='candle';
-  c.style.left=(4+i*11+Math.random()*4)+'%';c.style.top=(4+Math.random()*22)+'%';
-  c.style.animationDelay=(-Math.random()*6)+'s';c.style.opacity=.55+Math.random()*.4;
-  c.innerHTML='<div class="flame"></div><div class="wax"></div>';
-  cw.appendChild(c);
+function buildCandles(){
+  cw.innerHTML='';
+  const n=Math.max(7,Math.round(innerWidth/130)), k=innerWidth>1000?1.4:innerWidth>700?1.15:1;
+  cw.style.setProperty('--k',k);
+  for(let i=0;i<n;i++){
+    const c=document.createElement('div');c.className='candle';
+    c.style.left=(2+i*(94/n)+Math.random()*(50/n))+'%';c.style.top=(3+Math.random()*26)+'%';
+    c.style.animationDelay=(-Math.random()*6)+'s';c.style.opacity=.55+Math.random()*.4;
+    c.innerHTML='<div class="flame"></div><div class="wax"></div>';
+    cw.appendChild(c);
+  }
+}
+buildCandles();
+let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(buildCandles,250)});
+// moon rides at the peak of the castle's right-hand spire
+function placeMoon(){
+  const sv=document.getElementById('castle'),mn=document.getElementById('moon');
+  const W=innerWidth,H=sv.getBoundingClientRect().height,top0=innerHeight-H;
+  const k=Math.max(W/1200,H/300),ox=(W-1200*k)/2,oy=H-300*k;
+  const d=Math.max(58,84*k);
+  let x=ox+935*k, y=top0+oy+(-5+20)*k;          // beside the tallest right spire tip
+  x=Math.min(x,W-d/2-10);
+  mn.style.width=d+'px';
+  mn.style.left=(x-d/2)+'px';
+  mn.style.top=Math.max(8,y-d/2)+'px';
+}
+placeMoon();addEventListener('resize',placeMoon);
+// castle windows
+const wg=document.getElementById('wins');
+[[308,115],[308,160],[583,80],[583,125],[583,170],[858,95],[858,140],[165,185],[1003,170],[1003,210],[462,135],[728,130],[430,185],[470,185],[510,185],[560,215],[620,215],[680,185],[720,185],[760,185],[372,195],[802,200]].forEach(([x,y],i)=>{
+  const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+  r.setAttribute('x',x);r.setAttribute('y',y);r.setAttribute('width',7);r.setAttribute('height',12);r.setAttribute('rx',2);
+  r.setAttribute('class','win');r.style.animationDelay=(-Math.random()*3)+'s';r.style.animationDuration=(2+Math.random()*3)+'s';
+  wg.appendChild(r);
+});
+// owl: flies in, drops feathers, then perches on the letter
+function launchOwl(){
+  const owl=document.getElementById('owl');
+  owl.classList.add('flying');
+  const fi=setInterval(()=>{
+    const f=document.createElement('div');f.className='feather';f.textContent='🪶';
+    const r=owl.getBoundingClientRect(),lr=env.getBoundingClientRect();
+    f.style.left=(r.left-lr.left+30)+'px';f.style.top=(r.top-lr.top+50)+'px';
+    f.style.setProperty('--dx',(Math.random()*80-40)+'px');
+    env.appendChild(f);setTimeout(()=>f.remove(),3000);
+  },450);
+  setTimeout(()=>{
+    clearInterval(fi);
+    if(owl.classList.contains('leaving'))return;
+    owl.classList.remove('flying');owl.classList.add('perched');
+  },3400);
 }
 // open envelope
 const env=document.getElementById('envelope'),letter=document.getElementById('letter'),hint=document.getElementById('hint');
 env.addEventListener('click',()=>{
   env.classList.add('open');hint.style.display='none';
+  const ow=document.getElementById('owl');ow.classList.remove('flying','perched','patrol');ow.classList.add('leaving');
   setTimeout(()=>{
     env.style.display='none';          // remove envelope so the letter starts at the very top
+    document.getElementById('stage').classList.remove('closed');
     letter.classList.add('show');
     window.scrollTo({top:0,left:0,behavior:'auto'});
     requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:'auto'}));
   },900);
 });
+launchOwl(); // owl arrives together with the sealed envelope
+// every few seconds the owl takes a short flight and lands again
+setInterval(()=>{
+  const o=document.getElementById('owl');
+  if(!o.classList.contains('perched'))return;
+  o.classList.remove('perched');o.classList.add('patrol');
+  setTimeout(()=>{if(o.classList.contains('patrol')){o.classList.remove('patrol');o.classList.add('perched');}},4600);
+},9000);
 // countdown (gathering date, local Dhaka time)
 const target=new Date('2026-11-05T17:00:00+06:00').getTime();
 function tick(){
